@@ -3,319 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengantar XLOOKUP - Booklet Materi</title>
+    <title>Pengantar XLOOKUP - Modul Pembelajaran</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #fff7ed; color: #1e293b; overflow-x: hidden; }
+        body { font-family: 'Nunito', sans-serif; background-color: #fff; color: #1e293b; overflow-x: hidden; }
         h1, h2, h3, h4, .font-heading { font-family: 'Fredoka', sans-serif; }
         
-        .booklet-container {
-            max-width: 900px;
-            margin: 0 auto;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Card & Section Styles */
+        .section-container {
+            min-height: 100vh; /* Full screen per section on desktop */
             display: flex;
             flex-direction: column;
-            gap: 40px;
-            padding: 30px 20px;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
         }
 
-        .content-card {
+        /* Mobile Adjustment */
+        @media (max-width: 768px) {
+            .section-container {
+                min-height: auto;
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        .fun-card {
             background: white;
             border-radius: 24px;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1); /* Retro Shadow */
             border: 3px solid #1e293b;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s;
+            transition: transform 0.2s;
         }
-        .content-card:hover { transform: translateY(-5px); box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.15); }
+        .fun-card:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0px rgba(0,0,0,0.15); }
 
-        .section-title {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .code-box {
-            background-color: #1e293b;
+        .code-pill {
+            font-family: 'Courier New', monospace;
+            background: #1e293b;
             color: #a5b4fc;
-            padding: 15px;
-            border-radius: 12px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            font-size: 0.95rem;
-            overflow-x: auto;
-            border: 2px solid #475569;
-        }
-        .code-func { color: #facc15; }
-        .code-arg { color: #60a5fa; }
-        .code-text { color: #4ade80; }
-
-        .highlight-pill {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: 2px solid #1e293b;
-            background: #fef08a;
-            color: #1e293b;
-            margin-bottom: 10px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 700;
         }
 
-        /* Fun Background Blobs */
         .blob {
             position: absolute;
-            z-index: -1;
-            filter: blur(50px);
-            opacity: 0.6;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        
+        .grid-bg {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 30px 30px;
         }
     </style>
 </head>
-<body class="bg-orange-50">
+<body class="grid-bg">
 
-    <!-- Background Decoration -->
-    <div class="fixed inset-0 pointer-events-none">
-        <div class="blob w-80 h-80 bg-yellow-300 top-[-50px] left-[-50px] animate-pulse"></div>
-        <div class="blob w-80 h-80 bg-pink-300 bottom-[-50px] right-[-50px] animate-pulse" style="animation-delay: 2s;"></div>
-        <div class="blob w-64 h-64 bg-cyan-300 top-[40%] right-[-50px] animate-pulse" style="animation-delay: 1s;"></div>
-    </div>
+    <!-- === HERO SECTION === -->
+    <section class="section-container bg-gradient-to-br from-yellow-100 via-orange-100 to-pink-100 overflow-hidden">
+        <!-- Blobs -->
+        <div class="blob w-96 h-96 bg-yellow-400 top-[-100px] left-[-100px] animate-pulse"></div>
+        <div class="blob w-80 h-80 bg-pink-400 bottom-[-50px] right-[-50px] animate-pulse" style="animation-delay: 1s;"></div>
 
-    <div class="booklet-container">
-
-        <!-- HEADER / JUDUL -->
-        <div class="content-card bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 text-center py-12">
-            <span class="highlight-pill bg-indigo-500 text-white border-none shadow-md transform -rotate-2">
-                MODUL KELAS EXCEL
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-block bg-white px-6 py-2 rounded-full border-2 border-slate-900 shadow-[4px_4px_0px_#1e293b] text-sm font-black tracking-widest uppercase mb-8 transform -rotate-2">
+                Modul Excel Pemula
             </span>
-            <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-4 drop-shadow-sm leading-tight">
-                Pengantar <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">XLOOKUP</span>
-            </h1>
-            <p class="text-xl font-bold text-slate-600 mb-8 max-w-2xl mx-auto">
-                Panduan lengkap memahami fungsi pencarian modern di Excel, dari dasar hingga studi kasus nyata.
-            </p>
-            <div class="flex justify-center gap-4">
-                <div class="bg-white p-3 rounded-xl border-2 border-slate-900 shadow-sm"><i data-lucide="zap" class="w-6 h-6 text-yellow-500 mx-auto"></i><span class="text-xs font-bold block mt-1">Cepat</span></div>
-                <div class="bg-white p-3 rounded-xl border-2 border-slate-900 shadow-sm"><i data-lucide="target" class="w-6 h-6 text-red-500 mx-auto"></i><span class="text-xs font-bold block mt-1">Akurat</span></div>
-                <div class="bg-white p-3 rounded-xl border-2 border-slate-900 shadow-sm"><i data-lucide="layout" class="w-6 h-6 text-blue-500 mx-auto"></i><span class="text-xs font-bold block mt-1">Fleksibel</span></div>
-            </div>
-        </div>
-
-        <!-- 1. PENGANTAR RUMUS EXCEL -->
-        <div class="content-card bg-teal-50 border-teal-500">
-            <div class="section-title text-teal-800">
-                <div class="bg-teal-500 text-white p-2 rounded-lg mr-2"><i data-lucide="book-open" class="w-6 h-6"></i></div>
-                Pengantar: Bahasa Rumus Excel
-            </div>
-            <p class="text-slate-700 mb-6">Sebelum masuk ke "menu utama", mari pahami dulu aturan dasar menulis rumus di Excel agar tidak error.</p>
             
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="bg-white p-4 rounded-xl border-2 border-teal-200 shadow-sm">
-                    <h4 class="font-black text-teal-700 mb-2">1. Struktur (Sintaks)</h4>
-                    <p class="text-sm text-slate-600 mb-2">Rumus itu seperti kalimat. Harus urut.</p>
-                    <div class="code-box text-xs bg-slate-800">
-                        =NAMA_FUNGSI(Bahan1, Bahan2, ...)
+            <h1 class="text-6xl md:text-9xl font-black text-slate-900 mb-6 leading-tight drop-shadow-sm">
+                Pengantar<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">XLOOKUP</span>
+            </h1>
+            
+            <p class="text-xl md:text-3xl text-slate-700 font-bold mb-12 max-w-3xl mx-auto leading-relaxed">
+                Tinggalkan cara lama. Mulai pencarian data yang lebih cepat, akurat, dan anti-ribet! 🚀
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="fun-card p-6 bg-yellow-50 border-yellow-500">
+                    <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-slate-900">
+                        <i data-lucide="zap" class="w-6 h-6 text-slate-900"></i>
                     </div>
+                    <h3 class="font-black text-lg">Cepat</h3>
                 </div>
-                <div class="bg-white p-4 rounded-xl border-2 border-teal-200 shadow-sm">
-                    <h4 class="font-black text-teal-700 mb-2">2. Tanda Baca (Separator)</h4>
-                    <p class="text-sm text-slate-600 mb-2">Pemisah antar bahan bisa beda di tiap komputer.</p>
-                    <div class="flex gap-2">
-                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold border border-green-300">Koma ( , )</span>
-                        <span class="text-xs self-center font-bold">ATAU</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-bold border border-blue-300">Titik Koma ( ; )</span>
+                <div class="fun-card p-6 bg-green-50 border-green-500">
+                    <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-slate-900">
+                        <i data-lucide="target" class="w-6 h-6 text-slate-900"></i>
                     </div>
-                    <p class="text-[10px] mt-1 italic text-slate-500">*Cek petunjuk kecil di Excel saat mengetik rumus.</p>
+                    <h3 class="font-black text-lg">Akurat</h3>
+                </div>
+                <div class="fun-card p-6 bg-blue-50 border-blue-500">
+                    <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-slate-900">
+                        <i data-lucide="layout" class="w-6 h-6 text-slate-900"></i>
+                    </div>
+                    <h3 class="font-black text-lg">Fleksibel</h3>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevrons-down" class="w-10 h-10 text-slate-400"></i>
+        </div>
+    </section>
 
-        <!-- 2. KENAPA XLOOKUP? -->
-        <div class="content-card bg-blue-50 border-blue-500">
-            <div class="section-title text-blue-800">
-                <div class="bg-blue-500 text-white p-2 rounded-lg mr-2"><i data-lucide="help-circle" class="w-6 h-6"></i></div>
-                Kenapa Harus XLOOKUP?
+    <!-- === BAGIAN 0: DASAR FORMULA (PRE-REQUISITE) === -->
+    <section class="section-container bg-white">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="flex items-center gap-4 mb-10">
+                <span class="bg-slate-900 text-white px-4 py-1 rounded-lg font-bold text-xl">#0</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-800">Kenalan dengan Rumus Excel</h2>
             </div>
-            <div class="flex flex-col md:flex-row gap-6 items-center">
-                <div class="flex-1">
-                    <p class="text-slate-700 mb-4">
-                        XLOOKUP adalah fungsi pencarian data <strong>paling modern</strong> (tersedia di Office 365 & 2021). Ia diciptakan untuk menggantikan VLOOKUP yang punya banyak kelemahan.
+            
+            <p class="text-lg text-slate-600 mb-8 max-w-3xl">Sebelum masuk ke XLOOKUP, kita harus paham dulu "Tata Bahasa" Excel agar tidak error saat mengetik rumus.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Argumen & Sintaks -->
+                <div class="fun-card p-8 border-l-8 border-l-purple-500">
+                    <h3 class="text-2xl font-black text-purple-600 mb-4 flex items-center gap-2">
+                        <i data-lucide="puzzle" class="w-6 h-6"></i> Sintaks & Argumen
+                    </h3>
+                    <p class="text-slate-600 mb-4">Rumus itu seperti resep masakan. Harus urut!</p>
+                    <div class="bg-slate-900 text-white p-4 rounded-xl font-mono text-sm md:text-base shadow-inner">
+                        =NAMA_RUMUS(<span class="text-yellow-300">Bahan1</span>, <span class="text-green-300">Bahan2</span>, ...)
+                    </div>
+                    <ul class="mt-4 space-y-2 text-sm font-bold text-slate-500">
+                        <li>👉 <strong>Nama Rumus:</strong> Perintahnya (misal: XLOOKUP).</li>
+                        <li>👉 <strong>Argumen:</strong> Bahan-bahan di dalam kurung.</li>
+                    </ul>
+                </div>
+
+                <!-- Pemisah (Separator) -->
+                <div class="fun-card p-8 border-l-8 border-l-pink-500">
+                    <h3 class="text-2xl font-black text-pink-600 mb-4 flex items-center gap-2">
+                        <i data-lucide="separator-horizontal" class="w-6 h-6"></i> Si Pemisah (Separator)
+                    </h3>
+                    <p class="text-slate-600 mb-4">Hati-hati! Pemisah antar argumen bisa beda di tiap komputer.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-green-100 p-4 rounded-xl border-2 border-green-200">
+                            <span class="text-4xl font-black text-green-600">,</span>
+                            <p class="text-xs font-bold text-green-700 uppercase mt-2">Koma (English)</p>
+                        </div>
+                        <div class="bg-blue-100 p-4 rounded-xl border-2 border-blue-200">
+                            <span class="text-4xl font-black text-blue-600">;</span>
+                            <p class="text-xs font-bold text-blue-700 uppercase mt-2">Titik Koma (Indo)</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-3 text-center italic">*Cek petunjuk kecil di bawah rumus saat mengetik!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === BAGIAN 1: PERKENALAN XLOOKUP === -->
+    <section class="section-container bg-slate-50">
+        <div class="blob w-[500px] h-[500px] bg-blue-200 top-20 right-[-200px] opacity-30"></div>
+        
+        <div class="max-w-6xl mx-auto w-full relative z-10">
+            <div class="flex items-center gap-4 mb-10">
+                <span class="bg-slate-900 text-white px-4 py-1 rounded-lg font-bold text-xl">#1</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-800">Apa itu XLOOKUP?</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-xl text-slate-700 leading-relaxed font-medium mb-6">
+                        XLOOKUP adalah fungsi pencarian paling modern di Excel (Office 365 & 2021). Ia sering disebut sebagai <strong>"VLOOKUP Killer"</strong> karena memperbaiki semua kelemahan rumus lama.
                     </p>
-                    <div class="bg-white p-4 rounded-xl border-2 border-blue-200">
-                        <h4 class="font-bold text-blue-700 mb-2 border-b border-blue-100 pb-1">Keunggulan XLOOKUP:</h4>
-                        <ul class="text-sm text-slate-600 space-y-2">
-                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Bisa cari ke <strong>KIRI</strong> (VLOOKUP tidak bisa).</li>
-                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Tidak perlu hitung nomor kolom.</li>
-                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Default-nya <strong>Akurat</strong> (Exact Match).</li>
+                    <div class="bg-white p-6 rounded-2xl border-l-8 border-l-blue-500 shadow-lg">
+                        <h4 class="font-bold text-lg text-slate-800 mb-3">Kenapa Harus Pindah?</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-slate-600 font-bold">
+                                <span class="bg-green-100 p-1 rounded text-green-600"><i data-lucide="check" class="w-4 h-4"></i></span>
+                                Bisa mencari ke KIRI (VLOOKUP tidak bisa).
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-600 font-bold">
+                                <span class="bg-green-100 p-1 rounded text-green-600"><i data-lucide="check" class="w-4 h-4"></i></span>
+                                Tidak perlu hitung nomor kolom.
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-600 font-bold">
+                                <span class="bg-green-100 p-1 rounded text-green-600"><i data-lucide="check" class="w-4 h-4"></i></span>
+                                Default "Exact Match" (Lebih akurat).
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="w-32 h-32 bg-blue-200 rounded-full flex items-center justify-center border-4 border-white shadow-lg animate-pulse">
-                    <span class="text-4xl">🆚</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. MEMBEDAH RUMUS (WAJIB) -->
-        <div class="content-card bg-purple-50 border-purple-500">
-            <div class="section-title text-purple-800">
-                <div class="bg-purple-500 text-white p-2 rounded-lg mr-2"><i data-lucide="code" class="w-6 h-6"></i></div>
-                3 Bahan Wajib XLOOKUP
-            </div>
-            
-            <div class="code-box text-center mb-6 shadow-md">
-                <span class="code-func">=XLOOKUP</span>(<span class="code-arg">lookup_value</span>, <span class="code-arg">lookup_array</span>, <span class="code-arg">return_array</span>)
-            </div>
-
-            <div class="space-y-4">
-                <div class="flex items-start gap-4 bg-white p-4 rounded-xl border-l-4 border-l-yellow-400 border border-slate-100">
-                    <div class="bg-yellow-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
-                    <div>
-                        <h4 class="font-bold text-slate-800">lookup_value (Kunci)</h4>
-                        <p class="text-sm text-slate-600">Apa yang sedang kita cari? (Misal: Kode Barang "A-001").</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 bg-white p-4 rounded-xl border-l-4 border-l-blue-400 border border-slate-100">
-                    <div class="bg-blue-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
-                    <div>
-                        <h4 class="font-bold text-slate-800">lookup_array (Lokasi Kunci)</h4>
-                        <p class="text-sm text-slate-600">Di kolom mana kuncinya berada? (Blok kolom Kode di tabel data).</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 bg-white p-4 rounded-xl border-l-4 border-l-green-400 border border-slate-100">
-                    <div class="bg-green-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
-                    <div>
-                        <h4 class="font-bold text-slate-800">return_array (Hasil)</h4>
-                        <p class="text-sm text-slate-600">Data apa yang mau diambil? (Misal: Blok kolom Harga).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. FITUR CANGGIH (OPSIONAL) -->
-        <div class="content-card bg-pink-50 border-pink-500">
-            <div class="section-title text-pink-800">
-                <div class="bg-pink-500 text-white p-2 rounded-lg mr-2"><i data-lucide="settings" class="w-6 h-6"></i></div>
-                Fitur Canggih (Opsional)
-            </div>
-            <p class="text-slate-700 mb-4 text-sm">Bahan tambahan agar rumus makin "sedap". Tidak wajib diisi.</p>
-
-            <div class="grid md:grid-cols-3 gap-4">
-                <!-- Argumen 4 -->
-                <div class="bg-white p-4 rounded-xl border-2 border-pink-200 shadow-sm">
-                    <span class="highlight-pill bg-pink-100 text-pink-700 border-pink-200 mb-2">Argumen 4</span>
-                    <h4 class="font-bold text-slate-800 mb-1">if_not_found</h4>
-                    <p class="text-xs text-slate-500 mb-2">Pesan jika data tidak ketemu.</p>
-                    <div class="bg-slate-100 p-2 rounded text-xs font-mono text-pink-600">"Data Kosong"</div>
-                </div>
-                <!-- Argumen 5 -->
-                <div class="bg-white p-4 rounded-xl border-2 border-pink-200 shadow-sm">
-                    <span class="highlight-pill bg-pink-100 text-pink-700 border-pink-200 mb-2">Argumen 5</span>
-                    <h4 class="font-bold text-slate-800 mb-1">match_mode</h4>
-                    <p class="text-xs text-slate-500 mb-2">Jenis pencocokan.</p>
-                    <ul class="text-xs text-slate-600 list-disc pl-3">
-                        <li><strong>0:</strong> Sama Persis (Default)</li>
-                        <li><strong>2:</strong> Wildcard (* atau ?)</li>
-                    </ul>
-                </div>
-                <!-- Argumen 6 -->
-                <div class="bg-white p-4 rounded-xl border-2 border-pink-200 shadow-sm">
-                    <span class="highlight-pill bg-pink-100 text-pink-700 border-pink-200 mb-2">Argumen 6</span>
-                    <h4 class="font-bold text-slate-800 mb-1">search_mode</h4>
-                    <p class="text-xs text-slate-500 mb-2">Arah pencarian.</p>
-                    <ul class="text-xs text-slate-600 list-disc pl-3">
-                        <li><strong>1:</strong> Atas ke Bawah</li>
-                        <li><strong>-1:</strong> Bawah ke Atas (Data Terakhir)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. PENERAPAN STRATEGIS (2 KRITERIA) -->
-        <div class="content-card bg-orange-50 border-orange-500">
-            <div class="section-title text-orange-800">
-                <div class="bg-orange-500 text-white p-2 rounded-lg mr-2"><i data-lucide="layers" class="w-6 h-6"></i></div>
-                XLOOKUP 2 Kriteria
-            </div>
-            <p class="text-slate-700 mb-4">Bagaimana jika kita mau mencari harga berdasarkan <strong>Nama Barang</strong> DAN <strong>Ukuran</strong>?</p>
-            
-            <div class="bg-white p-5 rounded-2xl border-2 border-orange-200 mb-4">
-                <h4 class="font-bold text-slate-800 mb-2">Logika: Penggabungan (Ampersand &)</h4>
-                <p class="text-sm text-slate-600 mb-3">Kita gabungkan Kunci 1 & 2, serta Kolom 1 & 2 menggunakan simbol <code>&</code>.</p>
-                <div class="code-box text-xs md:text-sm">
-                    =XLOOKUP(<span class="code-func">Kunci1</span> & <span class="code-func">Kunci2</span>, <span class="code-arg">Kolom1</span> & <span class="code-arg">Kolom2</span>, <span class="code-text">KolomHasil</span>)
-                </div>
-            </div>
-        </div>
-
-        <!-- 6. STUDI KASUS KONKRET -->
-        <div class="content-card bg-indigo-50 border-indigo-500">
-            <div class="section-title text-indigo-800">
-                <div class="bg-indigo-500 text-white p-2 rounded-lg mr-2"><i data-lucide="clipboard-list" class="w-6 h-6"></i></div>
-                Studi Kasus: Diskon Penjualan
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-6 items-start">
-                <div>
-                    <p class="text-sm font-bold text-slate-700 mb-2">Tabel Data (Range A1:C4):</p>
-                    <table class="w-full text-sm text-left text-slate-600 border-2 border-indigo-200 rounded-lg overflow-hidden">
-                        <thead class="bg-indigo-200 text-indigo-900 font-bold">
-                            <tr><th class="p-2">Barang (A)</th><th class="p-2">Warna (B)</th><th class="p-2">Diskon (C)</th></tr>
-                        </thead>
-                        <tbody class="bg-white">
-                            <tr class="border-b border-indigo-100"><td class="p-2">Baju</td><td class="p-2">Merah</td><td class="p-2">10%</td></tr>
-                            <tr class="border-b border-indigo-100"><td class="p-2">Baju</td><td class="p-2">Biru</td><td class="p-2">15%</td></tr>
-                            <tr><td class="p-2">Celana</td><td class="p-2">Hitam</td><td class="p-2">20%</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="flex flex-col justify-center h-full">
-                    <div class="bg-white p-4 rounded-xl border-2 border-indigo-200 shadow-sm">
-                        <h4 class="font-bold text-indigo-700 mb-2 flex items-center gap-2"><i data-lucide="search" class="w-4 h-4"></i> Misi:</h4>
-                        <p class="text-sm text-slate-600 mb-4">Cari diskon untuk <strong>Baju</strong> berwarna <strong>Biru</strong>.</p>
-                        
-                        <div class="code-box text-xs">
-                            =XLOOKUP("Baju"&"Biru", A2:A4 & B2:B4, C2:C4)
+                <div class="bg-white p-8 rounded-[40px] border-4 border-slate-900 shadow-[10px_10px_0px_#3b82f6] text-center">
+                    <h3 class="text-2xl font-black text-slate-800 mb-6">Evolusi Pencarian</h3>
+                    <div class="flex items-center justify-center gap-4 text-slate-400 font-bold">
+                        <div class="flex flex-col items-center opacity-50">
+                            <i data-lucide="file-x" class="w-10 h-10 mb-2"></i>
+                            VLOOKUP
                         </div>
-                        
-                        <div class="mt-3 flex items-center gap-2">
-                            <span class="text-xs font-bold text-slate-500">Hasil:</span>
-                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-black border border-green-300">15%</span>
+                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                        <div class="flex flex-col items-center opacity-50">
+                            <i data-lucide="file-minus" class="w-10 h-10 mb-2"></i>
+                            INDEX+MATCH
+                        </div>
+                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                        <div class="flex flex-col items-center text-blue-600 scale-110">
+                            <i data-lucide="crown" class="w-12 h-12 mb-2 fill-current"></i>
+                            XLOOKUP
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 7. TIPS & TRIK -->
-        <div class="content-card bg-teal-50 border-teal-500">
-            <div class="section-title text-teal-800">
-                <div class="bg-teal-500 text-white p-2 rounded-lg mr-2"><i data-lucide="tool" class="w-6 h-6"></i></div>
-                Tips Anti-Gagal
+    <!-- === BAGIAN 2: SINTAKS & ARGUMEN === -->
+    <section class="section-container bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="text-center mb-16">
+                <span class="text-blue-400 font-bold uppercase tracking-widest text-sm">Bagian Inti</span>
+                <h2 class="text-5xl md:text-7xl font-black mt-2">Bedah Anatomi Rumus</h2>
             </div>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="bg-white p-4 rounded-xl border-2 border-teal-200">
-                    <h4 class="font-bold text-teal-700 mb-2 flex items-center gap-2"><i data-lucide="lock" class="w-4 h-4"></i> Kunci Range ($)</h4>
-                    <p class="text-xs text-slate-600">Tekan <strong>F4</strong> saat blok kolom agar rumus tidak geser saat di-copy.</p>
+
+            <!-- Code Block -->
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border-2 border-slate-700 shadow-2xl mb-12 overflow-x-auto text-center">
+                <code class="text-xl md:text-3xl font-mono font-bold leading-loose">
+                    <span class="text-purple-400">=XLOOKUP</span>(
+                    <span class="text-yellow-400 px-1 rounded hover:bg-white/10 transition cursor-help" title="Apa yang dicari?">lookup_value</span>, 
+                    <span class="text-blue-400 px-1 rounded hover:bg-white/10 transition cursor-help" title="Dimana mencarinya?">lookup_array</span>, 
+                    <span class="text-green-400 px-1 rounded hover:bg-white/10 transition cursor-help" title="Apa hasilnya?">return_array</span>
+                    )
+                </code>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Arg 1 -->
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-yellow-400 transition group">
+                    <div class="w-12 h-12 bg-yellow-400 text-slate-900 rounded-xl flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition">1</div>
+                    <h4 class="text-2xl font-bold mb-2 text-yellow-100">lookup_value</h4>
+                    <p class="text-slate-400"><strong>"Apa kuncinya?"</strong><br>Nilai yang dijadikan acuan pencarian (misal: ID Barang di sel A2).</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl border-2 border-teal-200">
-                    <h4 class="font-bold text-red-600 mb-2 flex items-center gap-2"><i data-lucide="alert-octagon" class="w-4 h-4"></i> Error #VALUE!</h4>
-                    <p class="text-xs text-slate-600">Penyebab utama: Panjang kolom pencarian & hasil <strong>TIDAK SAMA</strong>.</p>
+                <!-- Arg 2 -->
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-blue-400 transition group">
+                    <div class="w-12 h-12 bg-blue-400 text-slate-900 rounded-xl flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition">2</div>
+                    <h4 class="text-2xl font-bold mb-2 text-blue-100">lookup_array</h4>
+                    <p class="text-slate-400"><strong>"Di mana kuncinya?"</strong><br>Kolom tempat kunci berada. Blok kolom ini saja.</p>
+                </div>
+                <!-- Arg 3 -->
+                <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 hover:border-green-400 transition group">
+                    <div class="w-12 h-12 bg-green-400 text-slate-900 rounded-xl flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition">3</div>
+                    <h4 class="text-2xl font-bold mb-2 text-green-100">return_array</h4>
+                    <p class="text-slate-400"><strong>"Mana hasilnya?"</strong><br>Kolom yang berisi data yang ingin kamu ambil.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-    </div>
+    <!-- === BAGIAN 3: ARGUMEN OPSIONAL === -->
+    <section class="section-container bg-white">
+        <div class="blob w-96 h-96 bg-purple-100 bottom-0 left-0 opacity-50"></div>
+        
+        <div class="max-w-6xl mx-auto w-full z-10">
+            <div class="flex items-center gap-4 mb-10">
+                <span class="bg-slate-900 text-white px-4 py-1 rounded-lg font-bold text-xl">#3</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-800">Fitur Canggih (Opsional)</h2>
+            </div>
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl">Bahan tambahan ini tidak wajib diisi, tapi bisa membuat rumusmu jauh lebih powerful.</p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- If Not Found -->
+                <div class="fun-card p-8 border-t-8 border-t-pink-500">
+                    <span class="text-xs font-bold text-pink-500 uppercase tracking-wide mb-2 block">Argumen 4</span>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-3">if_not_found</h3>
+                    <p class="text-sm text-slate-600 mb-4">Gak perlu lagi pakai rumus <code>IFERROR</code>. Tulis pesan error langsung di sini.</p>
+                    <div class="bg-pink-50 text-pink-700 p-3 rounded-lg text-xs font-mono font-bold">
+                        "Data Tidak Ditemukan"
+                    </div>
+                </div>
+
+                <!-- Match Mode -->
+                <div class="fun-card p-8 border-t-8 border-t-indigo-500">
+                    <span class="text-xs font-bold text-indigo-500 uppercase tracking-wide mb-2 block">Argumen 5</span>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-3">match_mode</h3>
+                    <p class="text-sm text-slate-600 mb-4">Jenis pencocokan data.</p>
+                    <ul class="space-y-2 text-sm text-slate-700 font-bold">
+                        <li class="flex justify-between border-b border-slate-100 pb-1"><span>0</span> <span class="text-slate-400 font-normal">Exact (Default)</span></li>
+                        <li class="flex justify-between border-b border-slate-100 pb-1"><span>2</span> <span class="text-slate-400 font-normal">Wildcard (*?)</span></li>
+                        <li class="flex justify-between border-b border-slate-100 pb-1"><span>-1</span> <span class="text-slate-400 font-normal">Exact/Smaller</span></li>
+                        <li class="flex justify-between border-b border-slate-100 pb-1"><span>1</span> <span class="text-slate-400 font-normal">Exact/Larger</span></li>
+                    </ul>
+                </div>
+
+                <!-- Search Mode -->
+                <div class="fun-card p-8 border-t-8 border-t-teal-500">
+                    <span class="text-xs font-bold text-teal-500 uppercase tracking-wide mb-2 block">Argumen 6</span>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-3">search_mode</h3>
+                    <p class="text-sm text-slate-600 mb-4">Arah pencarian data.</p>
+                    <ul class="space-y-2 text-sm text-slate-700 font-bold">
+                        <li class="flex justify-between border-b border-slate-100 pb-1"><span>1</span> <span class="text-slate-400 font-normal">Atas ke Bawah</span></li>
+                        <li class="flex justify-between border-b border-slate-100 pb-1"><span>-1</span> <span class="text-slate-400 font-normal">Bawah ke Atas</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === BAGIAN 4: PENERAPAN & STUDI KASUS === -->
+    <section class="section-container bg-orange-50">
+        <div class="max-w-6xl mx-auto w-full">
+            
+            <!-- Konsep 2 Kriteria -->
+            <div class="mb-16">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="bg-slate-900 text-white px-4 py-1 rounded-lg font-bold text-xl">#4</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-800">XLOOKUP 2 Kriteria</h2>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl border-2 border-orange-200 shadow-lg">
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-3">The Power of Ampersand (&)</h3>
+                            <p class="text-slate-600 text-lg mb-4">
+                                Bagaimana jika kita ingin mencari harga berdasarkan <strong>Nama Barang</strong> DAN <strong>Ukuran</strong> sekaligus? Gunakan simbol <code>&</code> untuk menggabungkan kriteria.
+                            </p>
+                            <div class="bg-slate-900 p-4 rounded-xl">
+                                <code class="text-white font-mono text-sm md:text-lg">
+                                    =XLOOKUP(<span class="text-yellow-400">Kunci1</span>&<span class="text-yellow-400">Kunci2</span>, <span class="text-blue-400">Kolom1</span>&<span class="text-blue-400">Kolom2</span>, <span class="text-green-400">Hasil</span>)
+                                </code>
+                            </div>
+                        </div>
+                        <div class="w-32 h-32 bg-orange-100 rounded-full flex items-center justify-center text-6xl font-black text-orange-500 shadow-inner border-4 border-white">
+                            &
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STUDI KASUS KONKRET -->
+            <div>
+                <h3 class="text-3xl font-black text-slate-800 mb-6 flex items-center gap-3">
+                    <i data-lucide="clipboard-list" class="w-8 h-8 text-slate-800"></i> Studi Kasus Nyata
+                </h3>
+                
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Tabel Data -->
+                    <div class="flex-1 bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-md">
+                        <p class="text-sm font-bold text-slate-400 uppercase mb-4">Database Produk (A1:C4)</p>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-600 border-b-2 border-slate-200">
+                                    <th class="p-3 rounded-tl-lg">Barang (A)</th>
+                                    <th class="p-3">Warna (B)</th>
+                                    <th class="p-3 rounded-tr-lg">Diskon (C)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-700 font-medium">
+                                <tr class="border-b border-slate-100"><td class="p-3">Kaos</td><td class="p-3">Merah</td><td class="p-3">10%</td></tr>
+                                <tr class="bg-blue-50 border-b border-blue-100 ring-2 ring-blue-500 rounded-lg relative z-10"><td class="p-3 font-bold text-blue-700">Kaos</td><td class="p-3 font-bold text-blue-700">Biru</td><td class="p-3 font-bold text-blue-700">15%</td></tr>
+                                <tr><td class="p-3">Celana</td><td class="p-3">Hitam</td><td class="p-3">20%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Solusi -->
+                    <div class="flex-1 bg-indigo-600 text-white p-8 rounded-3xl shadow-xl flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl"></div>
+                        <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i data-lucide="search" class="w-5 h-5 text-yellow-300"></i> Misi Pencarian:
+                        </h4>
+                        <p class="text-indigo-100 mb-6 text-lg">Cari diskon untuk <strong>Kaos</strong> berwarna <strong>Biru</strong>.</p>
+                        
+                        <div class="bg-black/30 p-4 rounded-xl font-mono text-sm border border-white/20 mb-6 shadow-inner">
+                            =XLOOKUP(<span class="text-yellow-300">"Kaos"</span>&<span class="text-yellow-300">"Biru"</span>, A2:A4&B2:B4, C2:C4)
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-white text-indigo-900 p-4 rounded-xl font-bold shadow-lg">
+                            <span>Hasil Akhir:</span>
+                            <span class="text-2xl text-green-600">15%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- === BAGIAN 5: TIPS & CLOSING === -->
+    <section class="section-container bg-white">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Tips 1 -->
+                <div class="fun-card p-8 border-l-8 border-l-teal-400 bg-teal-50">
+                    <h3 class="text-xl font-black text-teal-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="lock" class="w-6 h-6"></i> Kunci Range ($)
+                    </h3>
+                    <p class="text-slate-600">Selalu tekan <strong>F4</strong> saat memilih range data agar menjadi absolut (muncul tanda $). Ini mencegah rumus berantakan saat di-copy.</p>
+                </div>
+                <!-- Tips 2 -->
+                <div class="fun-card p-8 border-l-8 border-l-red-400 bg-red-50">
+                    <h3 class="text-xl font-black text-red-800 mb-3 flex items-center gap-2">
+                        <i data-lucide="alert-octagon" class="w-6 h-6"></i> Error #VALUE!
+                    </h3>
+                    <p class="text-slate-600">Penyebab utamanya biasanya: Panjang kolom pencarian & kolom hasil <strong>TIDAK SAMA</strong> ukurannya.</p>
+                </div>
+            </div>
+
+            <!-- Closing -->
+            <div class="text-center py-12 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden shadow-2xl">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-black mb-6">Siap Praktik XLOOKUP?</h2>
+                    <p class="text-slate-400 mb-8 max-w-xl mx-auto">Sekarang Anda sudah memiliki senjata ampuh untuk mengolah data lebih cepat dan akurat.</p>
+                    <button class="bg-yellow-400 text-slate-900 px-10 py-4 rounded-full font-black text-lg shadow-[0_4px_0_#d97706] hover:translate-y-1 hover:shadow-none transition">
+                        Mulai Latihan Sekarang!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         lucide.createIcons();
